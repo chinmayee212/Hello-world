@@ -1,0 +1,148 @@
+1.to install npm and to print Hello world in angular js
+2.TO print the Product details in angular
+3.to install bootstrap details in angular
+4.Need to add in styles.css import bootstrap module in styles.css
+5.TO create component command  ng  g c  product-list -m app and then refresh it and add <app-product-list> </app-product-list>
+6.All code done in product details  in app module shift in the product-list  folder 
+7.All images  should be in assets folder 
+8.Directives *ngIf, *ngFor ,*ngClass ng-template
+	- *ngIf="products.length > 0 else noproducts"
+	-*ngFor= "let product of products"
+	<ng-template #noproducts>
+9.Data Binding
+	1.property binding
+	 example :string interpolation
+		Flow : js ->html  []
+	  example:<td><img [src]="product.image" [alt]="product.name" [width]="50"></td> 
+	  
+	2. Event 
+		js <- html ()
+
+		 tHeaderStyle = {
+			'background-color': (this.invertStyle),
+			'color' : (this.invertStyle ? 'black' : 'white')
+		 //cant give colspan 
+		 //need to give attr.colspan  
+	
+	3.two way data binding 
+
+		html->js
+		js->html [()]	
+		Exmple: [(ngModel)]="showImage"
+		To add data binding we need to formModule in app.component.ts
+		
+10:
+Filter Products
+
+	 filteredProducts = [];
+
+  private filter = '';
+  set filterBy(fb) {
+    this.filter = fb;
+    this.filteredProducts = this.products.filter(product => {
+      return product.name.toLowerCase().includes(this.filter.toLowerCase())
+        || product.description.toLowerCase().includes(this.filter.toLowerCase());
+    });
+  }
+
+  get filterBy() {
+    return this.filter;
+  }
+
+  constructor() {
+    this.filteredProducts = this.products;
+  }
+
+11.Pipes 
+
+Go to angular  documnetiation there are many types o f inbuilt pipes in angular and aslo we can create Custom pipes 
+We have created pipes folder there we have convert-to-spaces.ts there we have  implesmented PipeTransform and value is repllce in - to #
+
+and also by creating a pipes we need to import in app.module.ts and @ngModule decoreator
+
+13.Typescript  Functionalitty
+ annotaions and interface 
+ interface Person {
+    firstName: string;
+    lastName: string;
+}
+ Also u could write in another file name as product.ts and array can definr and  import into product file and declare the array over it
+
+
+14.Lifecycle of angular
+ngOnChanges() ngOnInit() ngDoCheck() ngAfterContentInit() ngAfterContentChecked() ngAfterViewInit() ngAfterViewChecked() ngOnDestroy()
+
+
+15.component communication
+
+To create the star component in place of rating(number )
+for that you need to add the font-awesome library in module
+go to font-awesome angular
+
+
+with @Input and @Output Decorator and Emitter and @HostListner
+@Input() rating: number; to directly found the child towards his parent 
+@Output() ratingClicked = new EventEmitter<number>();
+  
+We add the  emitter to find parents to the childern need to add in ratingclicked() in product list component and we could found out the rating declared in procuduct.ts
+
+
+<button class="btn btn-primary" (click)="product.rating =2.5"> Click Changes</button>
+  
+How to add directives  in the file
+
+ng g  directives highlight  
+keep in folder and import it to app component
+
+also add host listener to add with directives
+
+   @HostListener('mouseenter')
+   onMouseEnter() {
+    console.log('mouseenter');
+    this.el.nativeElement.style.backgroundColor =  this.highLightColor || 'yellow';
+   }
+
+   @HostListener('mouseleave')
+   onMouseLeave() {
+    console.log('mouseleave');
+    this.el.nativeElement.style.backgroundColor = 'red';
+   }
+
+16.Using Services and Dependency Injection
+ to genarate the services aganist the data we need to create service foldere and inject the data againist it 
+ command for it is ng genarate services service/product
+ get the function wriiten there and in the product-list and app compoment and make it commuted betwwen two function and using the observaable 
+ private increment$ = new BehaviorSubject<number>(0);
+ private num$: Observable<number> = range(0, 10);
+
+We also make the pakage,json function so that details of products would call aganist it
+17.Observable and Reactive Extension
+
+ 
+
+18.Routing
+-Lazy Loading ->loadChildern() =>import('./products/products.module').then (mod =>mod.ProductModule)
+routerlink
+router-outlet
+need to import router
+this.router.navigate(['/products']);
+const id: number = +this.route.snapshot.paramMap.get('id');
+
+Guards:
+-CanActivate()
+-CanActivateChild()
+-CanDeactivate()
+-CanLoad()
+
+
+19.Angular Forms
+-Reactive Form need to add ReactiveActiveForm in app module also we need to add Validators -- forbidden validators
+-ng Template driven also need FormsModule and also ngModel plays important role here
+
+20.Angular Build
+
+
+
+
+
+
